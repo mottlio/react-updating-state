@@ -21,6 +21,20 @@ class App extends Component {
         }
       ]
     };
+    setTimeout(() => {
+      const randomInst = Math.floor(Math.random() * this.state.instructors.length);
+      const hobbyIndex = Math.floor(
+        Math.random() * this.state.instructors[randomInst].length);
+
+// MAKE A NEW VERSION OF THE OLD DATA - DO NOT MODIFY STATE!!!
+
+      const instructors = this.state.instructors.slice();
+      instructors[randomInst] = Object.assign({}, instructors[randomInst]);
+      instructors[randomInst].hobbies = instructors[randomInst].hobbies.slice();
+
+// NOW I CAN DO WHATEVER I WANT WITH IT
+      instructors[radomInst].hobbies.splice(hobbyIndex, 1)
+    }, 5000);
   }
   render() {
     const instructors = this.state.instructors.map((instructor, index) => (
