@@ -33,7 +33,8 @@ class App extends Component {
       instructors[randomInst].hobbies = instructors[randomInst].hobbies.slice();
 
 // NOW I CAN DO WHATEVER I WANT WITH IT
-      instructors[radomInst].hobbies.splice(hobbyIndex, 1)
+      instructors[randomInst].hobbies.splice(hobbyIndex, 1);
+      this.setState({instructors});
     }, 5000);
   }
   render() {
