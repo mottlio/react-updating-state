@@ -1,5 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
+
+const InstructorItem = props => {
+  return (
+    <li>
+      <h3>{props.name}</h3>
+      <h4>
+        Hobbies: {props.hobbies.join(", ")}
+      </h4>
+    </li>
+  );
+}
+
+// we can't use a static because this is not a class, it's just a property:
+
+InstructorItem.propTypes = {
+  name: PropTypes.string,
+  hobbies: PropTypes.arrayOf(PropTypes.string)
+};
+
+
+
+
+//Below has been transformed into a stateless functional component (above):
+
+// class InstructorItem extends Component {
+//   static propTypes = {
+//     name: PropTypes.string,
+//     hobbies: PropTypes.arrayOf(PropTypes.string)
+//   }
+//   render() {
+//     return (
+//       <li>
+//         <h3>{this.props.name}</h3>
+//         <h4>
+//           Hobbies: {this.props.hobbies.join(", ")}
+//         </h4>
+//       </li>
+//     );
+//   }
+// }
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +72,7 @@ class App extends Component {
 //IN CONTRAST TO SPLICE, MAP RETURNS A NEW ARRAY WITHOUT MODIFYING THE OLD ONE
 
       const instructors = this.state.instructors.map((inst, i) => {
-        if (i === randInst) {
+        if (i === randomInst) {
           const hobbies = [...inst.hobbies];
           hobbies.splice(hobbyIndex, 1);
           return {
@@ -60,10 +101,11 @@ class App extends Component {
   }
   render() {
     const instructors = this.state.instructors.map((instructor, index) => (
-      <li key={index}>
-        <h3>{instructor.name}</h3>
-        <h4>Hobbies: {instructor.hobbies.join(", ")}</h4>
-      </li>
+      <InstructorItem
+        key={index}
+        name={instructor.name}
+        hobbies={instructor.hobbies}
+        />
     ));
     return (
       <div className="App">
