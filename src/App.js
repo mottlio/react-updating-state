@@ -30,12 +30,26 @@ class App extends Component {
 
 //IN CONTRAST TO SPLICE, MAP RETURNS A NEW ARRAY WITHOUT MODIFYING THE OLD ONE
 
-      const instructors = this.state.instructors.map((inst, i) => (
-      i === randomInst ? {
-        ...inst,
-        hobbies: [...inst.hobbies.slice(0, hobbyIndex).concat(inst.hobbies.slice(hobbyIndex+1, inst.hobbies.length))]
-      } : inst
-      ));
+      const instructors = this.state.instructors.map((inst, i) => {
+        if (i === randInst) {
+          const hobbies = [...inst.hobbies];
+          hobbies.splice(hobbyIndex, 1);
+          return {
+            ...inst,
+            hobbies
+          };
+        }
+        return inst;
+      });
+      
+      
+      
+      // (
+      // i === randomInst ? {
+      //   ...inst,
+      //   hobbies: [...inst.hobbies.slice(0, hobbyIndex).concat(inst.hobbies.slice(hobbyIndex+1, inst.hobbies.length))]
+      // } : inst
+      // ));
 //       instructors[randomInst] = Object.assign({}, instructors[randomInst]);
 //       instructors[randomInst].hobbies = instructors[randomInst].hobbies.slice();
 
