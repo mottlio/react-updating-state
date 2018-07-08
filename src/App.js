@@ -28,13 +28,20 @@ class App extends Component {
 
 // MAKE A NEW VERSION OF THE OLD DATA - DO NOT MODIFY STATE!!!
 
-      const instructors = this.state.instructors.slice();
-      instructors[randomInst] = Object.assign({}, instructors[randomInst]);
-      instructors[randomInst].hobbies = instructors[randomInst].hobbies.slice();
+//IN CONTRAST TO SPLICE, MAP RETURNS A NEW ARRAY WITHOUT MODIFYING THE OLD ONE
 
-// NOW I CAN DO WHATEVER I WANT WITH IT
-      instructors[randomInst].hobbies.splice(hobbyIndex, 1);
-      this.setState({instructors});
+      const instructors = this.state.instructors.map((inst, i) => (
+      i === randomInst ? {
+        ...inst,
+        hobbies: [...inst.hobbies.slice(0, hobbyIndex).concat(inst.hobbies.slice(hobbyIndex+1, inst.hobbies.length))]
+      } : inst
+      ));
+//       instructors[randomInst] = Object.assign({}, instructors[randomInst]);
+//       instructors[randomInst].hobbies = instructors[randomInst].hobbies.slice();
+
+// // NOW I CAN DO WHATEVER I WANT WITH IT
+//       instructors[randomInst].hobbies.splice(hobbyIndex, 1);
+//       this.setState({instructors});
     }, 5000);
   }
   render() {
